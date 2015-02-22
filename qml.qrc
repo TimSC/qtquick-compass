@@ -2,7 +2,7 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>MainForm.ui.qml</file>
-        <file>Compass.qml</file>
+        <file>CompassUi.qml</file>
         <file>compass.svg</file>
     </qresource>
 </RCC>
