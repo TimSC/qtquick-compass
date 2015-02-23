@@ -15,7 +15,7 @@ Item {
     function setBearing(headingIn)
     {
         heading = headingIn
-        background.rotation = heading
+        background.rotation = -heading
     }
 
     Item {
