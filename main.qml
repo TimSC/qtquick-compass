@@ -45,17 +45,15 @@ ApplicationWindow {
             magNorth = normVec(magNorth)
             //console.log("magEast:", magEast[0], ",", magEast[1], ",", magEast[2]);
 
-            var deviceHeading = [0., 1., 0.]
+            var deviceHeading = [0., 1., -1.]
+            deviceHeading = normVec(deviceHeading)
+
             var dotWithEast = dotProduct(deviceHeading, magEast)
             var dotWithNorth = dotProduct(deviceHeading, magNorth)
             var bearingRad = Math.atan2(dotWithEast, dotWithNorth)
             var bearingDeg = bearingRad * 180. / Math.PI
             //console.log("bearingDeg:", bearingDeg);
 
-            //if (isNaN(comp.reading.x))
-            //   return;
-
-            //heading = newX
             compasshere.setBearing(bearingDeg)
         }
     }
