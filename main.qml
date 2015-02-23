@@ -10,6 +10,21 @@ ApplicationWindow {
     height: 480
     visible: true
 
+    property real demoHeading
+    property int realCompass
+
+    Timer {
+        //Timer for demo rotation of compass
+        interval: 5
+        running: true
+        repeat: true
+        onTriggered: {
+            demoHeading += 1
+            if (realCompass != 1)
+                compassui.setBearing(demoHeading)
+        }
+    }
+
     Magnetometer {
         id: mag
         dataRate: 5
@@ -26,7 +41,7 @@ ApplicationWindow {
             magEast = normVec(magEast)
             magNorth = normVec(magNorth)
 
-            var deviceHeading = [0., 1., -1.]
+            var deviceHeading = [0., 1., -1.] //This is for portrait orientation on android
             deviceHeading = normVec(deviceHeading)
 
             var dotWithEast = dotProduct(deviceHeading, magEast)
@@ -36,6 +51,7 @@ ApplicationWindow {
             //console.log("bearingDeg:", bearingDeg);
 
             compassui.setBearing(bearingDeg)
+            realCompass = 1
         }
     }
 
