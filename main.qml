@@ -10,30 +10,12 @@ ApplicationWindow {
     height: 480
     visible: true
 
-    property real heading
-
-    menuBar: MenuBar {
-        Menu {
-            title: qsTr("&File")
-            MenuItem {
-                text: qsTr("&Open")
-                onTriggered: messageDialog.show(qsTr("Open action triggered"));
-            }
-            MenuItem {
-                text: qsTr("E&xit")
-                onTriggered: Qt.quit();
-            }
-        }
-    }
-
     Magnetometer {
         id: mag
         dataRate: 5
         active:true
 
         onReadingChanged: {
-            //var newX = comp.reading.z
-
             //console.log("Mag:", mag.reading.x, ",", mag.reading.y, ",", mag.reading.z);
             //console.log("Accel:", accel.reading.x, ",", accel.reading.y, ",", accel.reading.z);
 
@@ -43,7 +25,6 @@ ApplicationWindow {
 
             magEast = normVec(magEast)
             magNorth = normVec(magNorth)
-            //console.log("magEast:", magEast[0], ",", magEast[1], ",", magEast[2]);
 
             var deviceHeading = [0., 1., -1.]
             deviceHeading = normVec(deviceHeading)
@@ -54,7 +35,7 @@ ApplicationWindow {
             var bearingDeg = bearingRad * 180. / Math.PI
             //console.log("bearingDeg:", bearingDeg);
 
-            compasshere.setBearing(bearingDeg)
+            compassui.setBearing(bearingDeg)
         }
     }
 
@@ -63,21 +44,16 @@ ApplicationWindow {
         id: accel
         dataRate: 5
         active: true
-        onReadingChanged: {
-            //if (isNaN(accel.reading))
-             //   return;
-            //console.log("Accel:", accel.reading.x, ",", accel.reading.y, ",", accel.reading.z);
-        }
     }
 
     function crossProduct(a, b) {
 
-      // Check lengths
-      if (a.length != 3 || b.length != 3) {
-         return;
-      }
+        // Check lengths
+        if (a.length != 3 || b.length != 3) {
+            return;
+        }
 
-      return [a[1]*b[2] - a[2]*b[1],
+        return [a[1]*b[2] - a[2]*b[1],
               a[2]*b[0] - a[0]*b[2],
               a[0]*b[1] - a[1]*b[0]];
 
@@ -104,24 +80,9 @@ ApplicationWindow {
         return comp
     }
 
-    MainForm {
-        anchors.fill: parent
-    }
-
     CompassUi
     {
-        id: compasshere
-
-    }
-
-    MessageDialog {
-        id: messageDialog
-        title: qsTr("May I have your attention, please?")
-
-        function show(caption) {
-            messageDialog.text = caption;
-            messageDialog.open();
-        }
+        id: compassui
     }
 
 }

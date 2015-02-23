@@ -2,13 +2,7 @@ import QtQuick 2.0
 
 Item {
     id : compassui
-    width: {
-            return 200;
-    }
-
-    height: {
-            return 240;
-    }
+    anchors.fill: parent
 
     property real heading
 
@@ -19,11 +13,11 @@ Item {
     }
 
     Item {
-        anchors.centerIn: parent
-        width: 200; height: 240
-
+        //anchors.centerIn: parent
+        anchors.fill: parent
         Image { id: background;
-
+            anchors.fill: parent
+            fillMode: Image.PreserveAspectFit
             source: "compass.svg";
         }
 
