@@ -9,7 +9,7 @@ Item {
     function setBearing(headingIn)
     {
         heading = headingIn
-        background.rotation = -heading
+        backRotation.angle = -heading
     }
 
     Item {
@@ -19,6 +19,15 @@ Item {
             anchors.fill: parent
             fillMode: Image.PreserveAspectFit
             source: "compass.svg";
+
+            transform: Rotation {
+                id: backRotation
+                angle: 0
+                origin.x: background.width / 2; origin.y: background.height / 2;
+                Behavior on angle {
+                    SpringAnimation { spring: 2; damping: 0.2; modulus: 360 }
+                }
+            }
         }
 
     }
